@@ -14,11 +14,11 @@ public class JdbcUtils {
         Connection con = null;
         try {
             Class.forName(properties.getProperty("database.driver"));
-            con = DriverManager.getConnection(properties.getProperty(""), properties.getProperty(""), properties.getProperty(""));
+            con = DriverManager.getConnection(properties.getProperty("database.url"), properties.getProperty("database.user")
+                    , properties.getProperty("database.pass"));
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
-
         return con;
     }
 

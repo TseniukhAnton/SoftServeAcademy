@@ -1,5 +1,6 @@
 USE projectdb;
 CREATE TABLE IF NOT EXISTS user (id int auto_increment, name text(255), email varchar(255), UNIQUE(email), primary key(id));
+GRANT ALL PRIVILEGES ON projectdb to root;
 TRUNCATE TABLE user;
 DROP TABLE user;
 SELECT* FROM user;
