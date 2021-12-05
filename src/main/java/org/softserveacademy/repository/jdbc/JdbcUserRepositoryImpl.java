@@ -1,9 +1,9 @@
-package repository.jdbc;
+package org.softserveacademy.repository.jdbc;
 
 import lombok.extern.slf4j.Slf4j;
-import model.User;
-import org.springframework.jdbc.support.JdbcUtils;
-import repository.UserRepository;
+import org.softserveacademy.model.User;
+import org.softserveacademy.repository.UserRepository;
+import org.softserveacademy.util.JdbcUtils;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class JdbcUserRepositoryImpl implements UserRepository {
     @Override
     public User getById(Integer id) {
         User user = null;
-        try (PreparedStatement stmt = util.JdbcUtils.getPreparedStatement("SELECT* FROM user WHERE id=?")) {
+        try (PreparedStatement stmt = JdbcUtils.getPreparedStatement("SELECT* FROM user WHERE id=?")) {
             stmt.setInt(1, id);
             user = (User) stmt.executeQuery().getObject(1);
         } catch (Exception e) {
@@ -28,7 +28,7 @@ public class JdbcUserRepositoryImpl implements UserRepository {
 
     @Override
     public void deleteById(Integer id) {
-        try (PreparedStatement stmt = util.JdbcUtils.getPreparedStatement("DELETE FROM user WHERE ID = ?")) {
+        try (PreparedStatement stmt = JdbcUtils.getPreparedStatement("DELETE FROM user WHERE ID = ?")) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
         } catch (Exception e) {
@@ -38,7 +38,7 @@ public class JdbcUserRepositoryImpl implements UserRepository {
 
     @Override
     public User update(User user) {
-        try (PreparedStatement stmt = util.JdbcUtils.getPreparedStatement("UPDATE user SET name=?, email=? WHERE id=?")) {
+        try (PreparedStatement stmt = JdbcUtils.getPreparedStatement("UPDATE user SET name=?, email=? WHERE id=?")) {
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmail());
             stmt.setInt(3, user.getId());
@@ -51,7 +51,7 @@ public class JdbcUserRepositoryImpl implements UserRepository {
 
     @Override
     public User save(User user) {
-        try (PreparedStatement stmt = util.JdbcUtils.getPreparedStatement("INSERT INTO user (name, email) VALUES(?, ?)")) {
+        try (PreparedStatement stmt = JdbcUtils.getPreparedStatement("INSERT INTO user (name, email) VALUES(?, ?)")) {
             //TODO: investigate
             stmt.getGeneratedKeys();
             stmt.setString(1, user.getName());
@@ -66,7 +66,7 @@ public class JdbcUserRepositoryImpl implements UserRepository {
     @Override
     public List<User> getAll() {
         List<User> users = new ArrayList<>();
-        try (PreparedStatement stmt = util.JdbcUtils.getPreparedStatement(GET_USERS_QUERY)) {
+        try (PreparedStatement stmt = JdbcUtils.getPreparedStatement(GET_USERS_QUERY)) {
             ResultSet rs = stmt.getResultSet();
             while (rs.next()) {
                 int id = rs.getInt(1);

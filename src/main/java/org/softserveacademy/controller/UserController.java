@@ -1,8 +1,8 @@
-package controller;
+package org.softserveacademy.controller;
 
-import model.User;
-import repository.jdbc.JdbcUserRepositoryImpl;
-import repository.UserRepository;
+import org.softserveacademy.model.User;
+import org.softserveacademy.repository.jdbc.JdbcUserRepositoryImpl;
+import org.softserveacademy.repository.UserRepository;
 
 import java.util.List;
 
@@ -19,7 +19,8 @@ public class UserController {
     }
 
     public User updateUser(Integer id, String name, String email) {
-        User user = new User(id, name, email);
+        User user;
+        user = new User(id, name, email);
         return repo.update(user);
     }
 

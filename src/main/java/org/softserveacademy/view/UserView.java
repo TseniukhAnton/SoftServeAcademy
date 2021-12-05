@@ -1,10 +1,9 @@
-package view;
+package org.softserveacademy.view;
 
-import controller.UserController;
-import model.User;
+import org.softserveacademy.controller.UserController;
+import org.softserveacademy.model.User;
 
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
