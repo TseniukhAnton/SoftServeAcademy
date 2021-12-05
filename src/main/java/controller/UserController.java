@@ -1,14 +1,14 @@
 package controller;
 
 import model.User;
-import repository.SqlUserRepository;
+import repository.jdbc.JdbcUserRepositoryImpl;
 import repository.UserRepository;
 
 import java.util.List;
 
 public class UserController {
 
-    private final UserRepository repo = new SqlUserRepository();
+    private final UserRepository repo = new JdbcUserRepositoryImpl();
 
     public User getUser(Integer id) {
         return repo.getById(id);
