@@ -15,25 +15,13 @@ public class ViewImpl {
             userView.createUserFromController();
             System.out.println("New User was created");
             userView.getUserFromController();
-        } else {
-            System.out.println("Wrong command!");
-        }
-
-        if (sc.equals("Read")) {
+        } else if (sc.equals("Read")) {
             userView.getUserFromController();
-        } else {
-            System.out.println("Wrong command!");
-        }
-
-        if (sc.equals("Update")) {
+        } else if (sc.equals("Update")) {
             userView.updateUserFromController();
             System.out.println("User was updated");
             userView.getUserFromController();
-        } else {
-            System.out.println("Wrong command!");
-        }
-
-        if (sc.equals("Delete")) {
+        } else if (sc.equals("Delete")) {
             userView.getAllUsersFromController();
             userView.deleteUserFromController();
             System.out.println("User was deleted");
