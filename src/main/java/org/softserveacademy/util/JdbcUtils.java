@@ -13,7 +13,7 @@ public class JdbcUtils {
     private static Connection getConnection() {
         Connection con = null;
         try {
-            Class.forName(properties.getProperty("database.driver"));
+            Class.forName(properties.getProperty("com.mysql.jdbc.Driver"));
             con = DriverManager.getConnection(properties.getProperty("database.url"), properties.getProperty("database.user")
                     , properties.getProperty("database.pass"));
         } catch (Exception e) {
