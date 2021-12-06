@@ -18,9 +18,8 @@ public class JdbcUtils {
         try {
             FileReader reader = new FileReader(dbPropertiesFile);
             properties.load(reader);
-            Class.forName(properties.getProperty("com.mysql.jdbc.Driver"));
-            connection = DriverManager.getConnection(properties.getProperty("database.url"), properties.getProperty("database.user")
-                    , properties.getProperty("database.pass"));
+            Class.forName(properties.getProperty("jdbc.driver"));
+            connection = DriverManager.getConnection(properties.getProperty("jdbc.url"), properties.getProperty("jdbc.user"), properties.getProperty("jdbc.pass"));
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
