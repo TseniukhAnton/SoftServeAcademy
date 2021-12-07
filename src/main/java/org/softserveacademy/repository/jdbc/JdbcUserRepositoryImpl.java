@@ -12,12 +12,16 @@ import java.util.List;
 @Slf4j
 public class JdbcUserRepositoryImpl implements UserRepository {
 
-    private static final String GET_USERS_QUERY = "select * from user";
+    private static final String GET_USERS_QUERY = "SELECT * FROM user";
+    private static final String GET_USER_QUERY = "SELECT* FROM user WHERE id=?";
+    private static final String DELETE_USER_QUERY = "DELETE FROM user WHERE ID = ?";
+    private static final String UPDATE_USER_QUERY = "UPDATE user SET name=?, email=? WHERE id=?";
+    private static final String CREATE_USER_QUERY = "INSERT INTO user (name, email) VALUES(?, ?)";
 
     @Override
     public User getById(Integer id) {
         User user = null;
-        try (PreparedStatement stmt = JdbcUtils.getPreparedStatement("SELECT* FROM user WHERE id=?")) {
+        try (PreparedStatement stmt = JdbcUtils.getPreparedStatement(GET_USER_QUERY)) {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
@@ -38,7 +42,7 @@ public class JdbcUserRepositoryImpl implements UserRepository {
 
     @Override
     public void deleteById(Integer id) {
-        try (PreparedStatement stmt = JdbcUtils.getPreparedStatement("DELETE FROM user WHERE ID = ?")) {
+        try (PreparedStatement stmt = JdbcUtils.getPreparedStatement(DELETE_USER_QUERY)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
         } catch (Exception e) {
@@ -48,7 +52,7 @@ public class JdbcUserRepositoryImpl implements UserRepository {
 
     @Override
     public User update(User user) {
-        try (PreparedStatement stmt = JdbcUtils.getPreparedStatement("UPDATE user SET name=?, email=? WHERE id=?")) {
+        try (PreparedStatement stmt = JdbcUtils.getPreparedStatement(UPDATE_USER_QUERY)) {
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmail());
             stmt.setInt(3, user.getId());
@@ -61,7 +65,7 @@ public class JdbcUserRepositoryImpl implements UserRepository {
 
     @Override
     public User save(User user) {
-        try (PreparedStatement stmt = JdbcUtils.getPreparedStatement("INSERT INTO user (name, email) VALUES(?, ?)")) {
+        try (PreparedStatement stmt = JdbcUtils.getPreparedStatement(CREATE_USER_QUERY)) {
             stmt.getGeneratedKeys();
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmail());
