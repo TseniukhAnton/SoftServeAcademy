@@ -9,7 +9,7 @@ public class ViewImpl {
     private final UserView userView = new UserView();
 
     public void start() {
-        System.out.println("What would you like to do? Create, Read, Update or Delete?");
+        System.out.println("What would you like to do? Create, Read, Update, Delete or ShowAll?");
         String sc = scanner.next();
         if (sc.equals("Create")) {
             userView.createUserFromController();
@@ -25,6 +25,8 @@ public class ViewImpl {
             userView.getAllUsersFromController();
             userView.deleteUserFromController();
             System.out.println("User was deleted");
+            userView.getAllUsersFromController();
+        }else if (sc.equals("ShowAll")) {
             userView.getAllUsersFromController();
         } else {
             System.out.println("Wrong command!");

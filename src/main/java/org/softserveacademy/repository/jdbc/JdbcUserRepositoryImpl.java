@@ -19,7 +19,17 @@ public class JdbcUserRepositoryImpl implements UserRepository {
         User user = null;
         try (PreparedStatement stmt = JdbcUtils.getPreparedStatement("SELECT* FROM user WHERE id=?")) {
             stmt.setInt(1, id);
-            user = (User) stmt.executeQuery().getObject(1);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                int idRes = rs.getInt(1);
+                String name = rs.getString(2);
+                String email = rs.getString(3);
+                user = User.builder()
+                        .id(idRes)
+                        .name(name)
+                        .email(email)
+                        .build();
+            }
         } catch (Exception e) {
             log.error(e.getMessage());
         }
@@ -42,7 +52,7 @@ public class JdbcUserRepositoryImpl implements UserRepository {
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmail());
             stmt.setInt(3, user.getId());
-            stmt.executeUpdate();
+            stmt.execute();
         } catch (Exception e) {
             log.error(e.getMessage());
         }
@@ -52,11 +62,10 @@ public class JdbcUserRepositoryImpl implements UserRepository {
     @Override
     public User save(User user) {
         try (PreparedStatement stmt = JdbcUtils.getPreparedStatement("INSERT INTO user (name, email) VALUES(?, ?)")) {
-            //TODO: investigate
             stmt.getGeneratedKeys();
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmail());
-            stmt.executeUpdate();
+            stmt.execute();
         } catch (Exception e) {
             log.error(e.getMessage());
         }
@@ -67,7 +76,7 @@ public class JdbcUserRepositoryImpl implements UserRepository {
     public List<User> getAll() {
         List<User> users = new ArrayList<>();
         try (PreparedStatement stmt = JdbcUtils.getPreparedStatement(GET_USERS_QUERY)) {
-            ResultSet rs = stmt.getResultSet();
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt(1);
                 String name = rs.getString(2);

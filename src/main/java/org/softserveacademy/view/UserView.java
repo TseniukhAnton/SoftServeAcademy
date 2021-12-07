@@ -4,6 +4,7 @@ import org.softserveacademy.controller.UserController;
 import org.softserveacademy.model.User;
 
 import java.io.InputStreamReader;
+import java.sql.Statement;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,9 +23,9 @@ public class UserView {
     public void deleteUserFromController() {
         System.out.println("Please enter User id");
         Integer id = scanner.nextInt();
-        System.out.println(userController.getAllUsers());
+        //System.out.println(userController.getAllUsers());
         userController.deleteUser(id);
-        System.out.println(userController.getAllUsers());
+        //System.out.println(userController.getAllUsers());
     }
 
     public User updateUserFromController() {
@@ -36,15 +37,15 @@ public class UserView {
     }
 
     public User createUserFromController() {
-        System.out.println("Please enter User id, name, email");
-        Integer id = scanner.nextInt();
+        System.out.println("Please enter User name, email");
+        Integer id = Statement.RETURN_GENERATED_KEYS;
         String name = scanner.next();
         String email = scanner.next();
         return userController.createUser(id, name, email);
     }
 
     public List<User> getAllUsersFromController() {
-        System.out.println(userController.getAllUsers());
+        //System.out.println(userController.getAllUsers());
         return userController.getAllUsers();
     }
 

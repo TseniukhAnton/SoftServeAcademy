@@ -1,12 +1,7 @@
 package org.softserveacademy.util;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Properties;
 
 public class JdbcUtils {
@@ -28,7 +23,7 @@ public class JdbcUtils {
 
     public static PreparedStatement getPreparedStatement(String sql) {
         try {
-            return getConnection().prepareStatement(sql);
+            return getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         } catch (SQLException | IOException t) {
             throw new IllegalArgumentException("");
         }
