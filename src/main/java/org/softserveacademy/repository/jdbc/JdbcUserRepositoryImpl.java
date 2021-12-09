@@ -24,7 +24,7 @@ public class JdbcUserRepositoryImpl implements UserRepository {
         try (PreparedStatement stmt = JdbcUtils.getPreparedStatement(GET_USER_QUERY)) {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 int idRes = rs.getInt(1);
                 String name = rs.getString(2);
                 String email = rs.getString(3);
