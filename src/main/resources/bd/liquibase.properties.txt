@@ -1,0 +1,5 @@
+url=jdbc:mysql://localhost:3306/projectdb
+username=root
+password=12345
+driver=com.mysql.jdbc.Driver
+changeLogFile=src/main/resources/bd/changelog.xml
