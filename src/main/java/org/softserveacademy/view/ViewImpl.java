@@ -11,25 +11,26 @@ public class ViewImpl {
     public void start() {
         System.out.println("What would you like to do? Create, Read, Update, Delete or ShowAll?");
         String sc = scanner.next();
-        if (sc.equals("Create")) {
-            userView.createUserFromController();
-            System.out.println("New User was created");
-            userView.getUserFromController();
-        } else if (sc.equals("Read")) {
-            userView.getUserFromController();
-        } else if (sc.equals("Update")) {
-            userView.updateUserFromController();
-            System.out.println("User was updated");
-            userView.getUserFromController();
-        } else if (sc.equals("Delete")) {
-            userView.getAllUsersFromController();
-            userView.deleteUserFromController();
-            System.out.println("User was deleted");
-            userView.getAllUsersFromController();
-        }else if (sc.equals("ShowAll")) {
-            userView.getAllUsersFromController();
-        } else {
-            System.out.println("Wrong command!");
+        switch (sc) {
+            case "Create" -> {
+                userView.createUserFromController();
+                System.out.println("New User was created");
+                userView.getUserFromController();
+            }
+            case "Read" -> userView.getUserFromController();
+            case "Update" -> {
+                userView.updateUserFromController();
+                System.out.println("User was updated");
+                userView.getUserFromController();
+            }
+            case "Delete" -> {
+                userView.getAllUsersFromController();
+                userView.deleteUserFromController();
+                System.out.println("User was deleted");
+                userView.getAllUsersFromController();
+            }
+            case "ShowAll" -> userView.getAllUsersFromController();
+            default -> System.out.println("Wrong command!");
         }
     }
 }
