@@ -24,10 +24,9 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-        User user = jdbcUserRepository.getById((Integer) request.getSession().getAttribute("id"));
-        user.setName(request.getParameter("name"));
-        user.setEmail(request.getParameter("email"));
-        System.out.println(user.getId());
+        //User user = jdbcUserRepository.getById((Integer) request.getSession().getAttribute("id"));
+        User user = new User(1,request.getParameter("name"),request.getParameter("email"));
+        System.out.println(user);
         jdbcUserRepository.save(user);
     }
 }
