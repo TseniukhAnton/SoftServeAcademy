@@ -28,6 +28,6 @@ public class UserServlet extends HttpServlet {
         user.setName(request.getParameter("name"));
         user.setEmail(request.getParameter("email"));
         System.out.println(user.getId());
-        jdbcUserRepository.update(user);
+        jdbcUserRepository.save(user);
     }
 }
