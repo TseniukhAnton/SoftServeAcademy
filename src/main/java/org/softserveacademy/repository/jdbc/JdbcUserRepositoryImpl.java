@@ -55,7 +55,7 @@ public class JdbcUserRepositoryImpl implements UserRepository {
         try (PreparedStatement stmt = JdbcUtils.getPreparedStatement(UPDATE_USER_QUERY)) {
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmail());
-            stmt.setInt(3, user.getId());
+            //stmt.setInt(3, user.getId());
             stmt.execute();
         } catch (Exception e) {
             log.error(e.getMessage());
