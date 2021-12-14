@@ -11,7 +11,7 @@ import org.softserveacademy.repository.jdbc.JdbcUserRepositoryImpl;
 import java.io.IOException;
 
 
-@WebServlet(name = "UserServlet", value = "/users")
+@WebServlet(name = "UserServlet")
 public class UserServlet extends HttpServlet {
     private JdbcUserRepositoryImpl jdbcUserRepository;
 
