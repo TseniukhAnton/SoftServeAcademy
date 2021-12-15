@@ -1,19 +1,21 @@
-package servlet;
+package org.softserveacademy.servlet;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.annotation.*;
+import jakarta.servlet.http.*;
 import org.softserveacademy.model.User;
 import org.softserveacademy.repository.jdbc.JdbcUserRepositoryImpl;
-
 import java.io.IOException;
 
 
 @WebServlet(name = "UserServlet")
 public class UserServlet extends HttpServlet {
     private JdbcUserRepositoryImpl jdbcUserRepository;
+
+    @Override
+    public void init() {
+        jdbcUserRepository = new JdbcUserRepositoryImpl();
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -25,8 +27,13 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         //User user = jdbcUserRepository.getById((Integer) request.getSession().getAttribute("id"));
-        User user = new User(1,request.getParameter("name"),request.getParameter("email"));
+        User user = new User(1, request.getParameter("name"), request.getParameter("email"));
         System.out.println(user);
         jdbcUserRepository.save(user);
+    }
+
+    @Override
+    public void destroy() {
+
     }
 }
