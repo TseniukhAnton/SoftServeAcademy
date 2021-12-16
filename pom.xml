@@ -10,8 +10,8 @@
     <url>https://maven.apache.org</url>
 
     <properties>
-        <maven.compiler.source>16</maven.compiler.source>
-        <maven.compiler.target>16</maven.compiler.target>
+        <maven.compiler.source>1.16</maven.compiler.source>
+        <maven.compiler.target>1.16</maven.compiler.target>
         <javax.servlet.api.version>2.5</javax.servlet.api.version>
     </properties>
     <dependencies>

@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
 import org.softserveacademy.model.User;
 import org.softserveacademy.repository.jdbc.JdbcUserRepositoryImpl;
+
 import java.io.IOException;
 
 
@@ -26,8 +27,7 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-        //User user = jdbcUserRepository.getById((Integer) request.getSession().getAttribute("id"));
-        User user = new User(1, request.getParameter("name"), request.getParameter("email"));
+        User user = new User(request.getParameter("name"), request.getParameter("email"));
         System.out.println(user);
         jdbcUserRepository.save(user);
     }

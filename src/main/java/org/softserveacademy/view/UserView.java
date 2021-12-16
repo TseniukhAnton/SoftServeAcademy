@@ -38,10 +38,10 @@ public class UserView {
 
     public User createUserFromController() {
         System.out.println("Please enter User name, email");
-        Integer id = Statement.RETURN_GENERATED_KEYS;
+        //Integer id = Statement.RETURN_GENERATED_KEYS;
         String name = scanner.next();
         String email = scanner.next();
-        return userController.createUser(id, name, email);
+        return userController.createUser(name, email);
     }
 
     public List<User> getAllUsersFromController() {

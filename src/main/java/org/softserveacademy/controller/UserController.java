@@ -14,8 +14,9 @@ public class UserController {
         return repo.getById(id);
     }
 
-    public void deleteUser(Integer id) {
+    public User deleteUser(Integer id) {
         repo.deleteById(id);
+        return repo.getById(id);
     }
 
     public User updateUser(Integer id, String name, String email) {
@@ -24,8 +25,8 @@ public class UserController {
         return repo.update(user);
     }
 
-    public User createUser(Integer id, String name, String email) {
-        User user = new User(id, name, email);
+    public User createUser( String name, String email) {
+        User user = new User(name, email);
         return repo.save(user);
     }
 

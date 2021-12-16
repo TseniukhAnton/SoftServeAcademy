@@ -18,6 +18,7 @@ public class JdbcUserRepositoryImpl implements UserRepository {
     private static final String UPDATE_USER_QUERY = "UPDATE user SET name=?, email=? WHERE id=?";
     private static final String CREATE_USER_QUERY = "INSERT INTO user (name, email) VALUES(?, ?)";
 
+
     @Override
     public User getById(Integer id) {
         User user = null;
@@ -41,13 +42,14 @@ public class JdbcUserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public User deleteById(Integer id) {
         try (PreparedStatement stmt = JdbcUtils.getPreparedStatement(DELETE_USER_QUERY)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
         } catch (Exception e) {
             log.error(e.getMessage());
         }
+        return getById(id);
     }
 
     @Override
