@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
 
-@WebServlet(name = "test")
+//@WebServlet(name = "test")
 public class ServletRequestDemo extends HttpServlet {
 
     @Override
