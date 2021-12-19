@@ -1,12 +1,14 @@
 package org.softserveacademy.servlet;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.servlet.annotation.*;
 import jakarta.servlet.http.*;
 import org.softserveacademy.model.User;
+import org.softserveacademy.repository.UserRepository;
 import org.softserveacademy.repository.jdbc.JdbcUserRepositoryImpl;
+import org.softserveacademy.services.impl.UserServiceImpl;
 
 import java.io.IOException;
+import java.util.List;
 
 
 //@WebServlet(name = "UserServlet")
@@ -20,6 +22,7 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //new UserRepository().getById()
         User user = jdbcUserRepository.getById((Integer) request.getSession().getAttribute("id"));
         response.setContentType("application/json");
         response.getWriter().write(new ObjectMapper().writeValueAsString(user));
