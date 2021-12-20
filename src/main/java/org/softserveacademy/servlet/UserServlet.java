@@ -13,13 +13,16 @@ import java.io.IOException;
 
 //@WebServlet(name = "UserServlet")
 public class UserServlet extends HttpServlet {
-    //private final JdbcUserRepositoryImpl jdbcUserRepository = new JdbcUserRepositoryImpl();
-    UserView userView = new UserView();
+    private JdbcUserRepositoryImpl jdbcUserRepository;
+
+    @Override
+    public void init() {
+        jdbcUserRepository = new JdbcUserRepositoryImpl();
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        //User user = jdbcUserRepository.getById((Integer) request.getSession().getAttribute("id"));
-        User user = userView.getUserFromController();
+        User user = jdbcUserRepository.getById((Integer) request.getSession().getAttribute("id"));
         response.setContentType("application/json");
         response.getWriter().write(new ObjectMapper().writeValueAsString(user));
     }
@@ -28,7 +31,6 @@ public class UserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         User user = new User(request.getParameter("name"), request.getParameter("email"));
         System.out.println(user);
-        //jdbcUserRepository.save(user);
-        userView.createUserFromController();
+        jdbcUserRepository.save(user);
     }
 }

@@ -1,8 +1,8 @@
-package org.softserveacademy.services.impl;
+package org.softserveacademy.service.impl;
 
 import org.softserveacademy.repository.UserRepository;
 import org.softserveacademy.repository.jdbc.JdbcUserRepositoryImpl;
-import org.softserveacademy.services.UserService;
+import org.softserveacademy.service.UserService;
 
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;

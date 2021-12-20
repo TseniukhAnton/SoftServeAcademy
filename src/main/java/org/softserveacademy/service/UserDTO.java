@@ -1,4 +1,4 @@
-package org.softserveacademy.services;
+package org.softserveacademy.service;
 
 import java.sql.Statement;
 
