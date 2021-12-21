@@ -3,9 +3,10 @@ package org.softserveacademy.controller;
 import org.softserveacademy.model.User;
 import org.softserveacademy.repository.jdbc.JdbcUserRepositoryImpl;
 import org.softserveacademy.repository.UserRepository;
+import org.springframework.stereotype.Controller;
 
 import java.util.List;
-
+@Controller
 public class UserController {
 
     private final UserRepository repo = new JdbcUserRepositoryImpl();

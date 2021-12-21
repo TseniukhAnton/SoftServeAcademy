@@ -14,6 +14,7 @@ public class User {
     private String name;
     private String email;
 
+
     public User(String name, String email) {
         this.id = Statement.RETURN_GENERATED_KEYS;
         this.name = name;
