@@ -8,15 +8,15 @@
    http://www.liquibase.org/xml/ns/dbchangelog
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
     <changeSet author="Anton" id="createTableUser">
-        <createTable tableName="user">
-            <column name="id" type="INTEGER"  autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="name" type="text(255)"/>
-            <column name="email" type="varchar(255)">
-                <constraints unique="true" nullable="false"/>
-            </column>
-        </createTable>
+<!--        <createTable tableName="user">-->
+<!--            <column name="id" type="INTEGER"  autoIncrement="true">-->
+<!--                <constraints primaryKey="true" nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="name" type="text(255)"/>-->
+<!--            <column name="email" type="varchar(255)">-->
+<!--                <constraints unique="true" nullable="false"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
     </changeSet>
 </databaseChangeLog>
 
