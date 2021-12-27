@@ -1,4 +1,4 @@
-package org.softserveacademy.service;
+package org.softserveacademy.web.dto;
 
 import java.sql.Statement;
 

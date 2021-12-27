@@ -1,4 +1,4 @@
-package org.softserveacademy.servlet;
+package org.softserveacademy.web.servlet;
 
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,6 +18,7 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         List<User> users = userRepository.getAll();
+        response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
         response.getWriter().write(String.valueOf(users));
 //        new ObjectMapper().writeValueAsString(users)

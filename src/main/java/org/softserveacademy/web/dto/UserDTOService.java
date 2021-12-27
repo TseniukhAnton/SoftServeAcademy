@@ -1,4 +1,4 @@
-package org.softserveacademy.service;
+package org.softserveacademy.web.dto;
 
 public interface UserDTOService {
 
