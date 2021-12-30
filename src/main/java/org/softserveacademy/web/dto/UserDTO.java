@@ -1,20 +1,12 @@
 package org.softserveacademy.web.dto;
 
-import java.sql.Statement;
-
 public class UserDTO {
-    private final Integer id;
     private String name;
     private String email;
 
     public UserDTO(String name, String email) {
-        this.id = Statement.RETURN_GENERATED_KEYS;
         this.name = name;
         this.email = email;
-    }
-
-    public Integer getId() {
-        return id;
     }
 
     public String getName() {
@@ -31,5 +23,13 @@ public class UserDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDTO{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }
