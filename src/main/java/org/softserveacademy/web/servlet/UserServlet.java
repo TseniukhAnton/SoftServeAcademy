@@ -1,5 +1,6 @@
 package org.softserveacademy.web.servlet;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,7 +22,7 @@ public class UserServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
         response.getWriter().write(String.valueOf(users));
-//        new ObjectMapper().writeValueAsString(users)
+        new ObjectMapper().writeValueAsString(users);
     }
 
     @Override
@@ -29,7 +30,4 @@ public class UserServlet extends HttpServlet {
         doGet(request,response);
     }
 
-    public void destroy() {
-
-    }
 }

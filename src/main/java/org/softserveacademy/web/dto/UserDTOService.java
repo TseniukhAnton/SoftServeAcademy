@@ -2,7 +2,7 @@ package org.softserveacademy.web.dto;
 
 public interface UserDTOService {
 
-    UserDTO getUserById(Long id);
+    UserDTO getUserByEmail(String email);
 
     Long createUser(UserDTO data);
 }

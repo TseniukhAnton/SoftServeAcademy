@@ -1,6 +1,6 @@
 package org.softserveacademy.web.dto;
 
-public class UserDTO {
+public class UserDTO implements UserDTOService{
     private String name;
     private String email;
 
@@ -31,5 +31,15 @@ public class UserDTO {
                 "name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 '}';
+    }
+
+    @Override
+    public UserDTO getUserByEmail(String email) {
+        return null;
+    }
+
+    @Override
+    public Long createUser(UserDTO data) {
+        return null;
     }
 }
