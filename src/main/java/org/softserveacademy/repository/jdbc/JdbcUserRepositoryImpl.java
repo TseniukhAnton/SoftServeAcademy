@@ -14,6 +14,7 @@ public class JdbcUserRepositoryImpl implements UserRepository {
 
     private static final String GET_USERS_QUERY = "SELECT * FROM user";
     private static final String GET_USER_QUERY = "SELECT* FROM user WHERE id=?";
+    private static final String GET_USER_EMAIL_QUERY = "SELECT* FROM user WHERE EMAIL=?";
     private static final String DELETE_USER_QUERY = "DELETE FROM user WHERE ID = ?";
     private static final String UPDATE_USER_QUERY = "UPDATE user SET name=?, email=? WHERE id=?";
     private static final String CREATE_USER_QUERY = "INSERT INTO user (name, email) VALUES(?, ?)";
@@ -43,6 +44,28 @@ public class JdbcUserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public User getByEmail(String email) {
+        User user = null;
+        try (PreparedStatement stmt = jdbcUtils.getPreparedStatement(GET_USER_EMAIL_QUERY)) {
+            stmt.setString(3, email);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String name = rs.getString(2);
+                String emailRes = rs.getString(3);
+                user = User.builder()
+                        .id(id)
+                        .name(name)
+                        .email(emailRes)
+                        .build();
+            }
+        } catch (Exception e) {
+            //   log.error(e.getMessage());
+        }
+        return user;
+    }
+
+    @Override
     public User deleteById(Integer id) {
         try (PreparedStatement stmt = jdbcUtils.getPreparedStatement(DELETE_USER_QUERY)) {
             stmt.setInt(1, id);
@@ -58,7 +81,7 @@ public class JdbcUserRepositoryImpl implements UserRepository {
         try (PreparedStatement stmt = jdbcUtils.getPreparedStatement(UPDATE_USER_QUERY)) {
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmail());
-            //stmt.setInt(3, user.getId());
+            stmt.setInt(3, user.getId());
             stmt.execute();
         } catch (Exception e) {
          //   log.error(e.getMessage());
