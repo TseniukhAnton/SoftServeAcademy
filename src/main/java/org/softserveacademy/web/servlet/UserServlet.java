@@ -14,7 +14,7 @@ import java.util.List;
 
 //@WebServlet(name = "UserServlet")
 public class UserServlet extends HttpServlet {
-    private UserServiceImpl userServiceImpl = new UserServiceImpl();
+    private UserServiceImpl userServiceImpl = new UserServiceImpl(new JdbcUserRepositoryImpl());
     private UserRepository userRepository = new JdbcUserRepositoryImpl();
 
     @Override
@@ -28,7 +28,7 @@ public class UserServlet extends HttpServlet {
         response.setContentType("application/json");
         response.getWriter().write(String.valueOf(users));
         //new ObjectMapper().writeValueAsString(users);
-        User user = userServiceImpl.getByEmail((String) request.getSession().getAttribute("anton.tseniukh@gmail.com"));
+        User user = userServiceImpl.getByEmail((String) request.getSession().getAttribute("email"));
         response.setContentType("application/json");
         response.getWriter().write(String.valueOf(user));
     }
@@ -36,11 +36,11 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         doGet(request,response);
-        User user = userServiceImpl.getByEmail((String) request.getSession().getAttribute("anton.tseniukh@gmail.com"));
-        String newUsername = request.getParameter("newUserName");
-        String newEmail = request.getParameter("newEmail");
-        System.out.println(user.getId());
-        userServiceImpl.update(user, newUsername, newEmail);
+//        User user = userServiceImpl.getByEmail((String) request.getSession().getAttribute("email"));
+//        String newUsername = request.getParameter("name");
+//        String newEmail = request.getParameter("email");
+//        System.out.println(user.getId());
+//        userServiceImpl.update(user, newUsername, newEmail);
     }
 
 }
