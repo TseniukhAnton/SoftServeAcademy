@@ -23,7 +23,7 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/user-list.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/user-list.jsp");
         request.setAttribute("user", userServiceImpl.getAll() );
         requestDispatcher.forward(request, response);
 //        List<User> users = userRepository.getAll();
