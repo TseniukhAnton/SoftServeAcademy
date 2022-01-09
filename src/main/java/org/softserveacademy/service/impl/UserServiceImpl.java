@@ -35,9 +35,9 @@ public class UserServiceImpl implements UserService {
         return userRepository.getAll();
     }
 
-    public void save(String name, String email) {
+    public User save(String name, String email) {
         User user = new User(name, email);
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
     public User update(User user, String newUserName, String newEmail) {
