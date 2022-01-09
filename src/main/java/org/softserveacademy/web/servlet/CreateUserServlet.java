@@ -65,5 +65,6 @@ public class CreateUserServlet extends HttpServlet {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         userServiceImpl.save(name, email);
+        response.sendRedirect("/userServlet");
     }
 }

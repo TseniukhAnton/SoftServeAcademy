@@ -1,20 +1,20 @@
 package org.softserveacademy.web.servlet;
 
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.softserveacademy.model.User;
 import org.softserveacademy.repository.UserRepository;
 import org.softserveacademy.repository.jdbc.JdbcUserRepositoryImpl;
 import org.softserveacademy.service.impl.UserServiceImpl;
 
 import java.io.IOException;
-import java.util.List;
 
 
 //@WebServlet(name = "UserServlet")
 public class UserServlet extends HttpServlet {
-    private UserServiceImpl userServiceImpl = new UserServiceImpl(new JdbcUserRepositoryImpl());
+    private UserServiceImpl userServiceImpl = new UserServiceImpl();
     private UserRepository userRepository = new JdbcUserRepositoryImpl();
 
     @Override
@@ -22,19 +22,22 @@ public class UserServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        List<User> users = userRepository.getAll();
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("application/json");
-        response.getWriter().write(String.valueOf(users));
-        //new ObjectMapper().writeValueAsString(users);
-        User user = userServiceImpl.getByEmail((String) request.getSession().getAttribute("email"));
-        response.setContentType("application/json");
-        response.getWriter().write(String.valueOf(user));
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/user-list.jsp");
+        request.setAttribute("user", userServiceImpl.getAll() );
+        requestDispatcher.forward(request, response);
+//        List<User> users = userRepository.getAll();
+//        response.setCharacterEncoding("UTF-8");
+//        response.setContentType("application/json");
+//        response.getWriter().write(String.valueOf(users));
+//        //new ObjectMapper().writeValueAsString(users);
+//        User user = userServiceImpl.getByEmail((String) request.getSession().getAttribute("email"));
+//        response.setContentType("application/json");
+//        response.getWriter().write(String.valueOf(user));
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         doGet(request,response);
 //        User user = userServiceImpl.getByEmail((String) request.getSession().getAttribute("email"));
 //        String newUsername = request.getParameter("name");
