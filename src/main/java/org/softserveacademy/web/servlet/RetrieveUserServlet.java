@@ -8,7 +8,7 @@ import org.softserveacademy.service.impl.UserServiceImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class GetUserServlet extends HttpServlet {
+public class RetrieveUserServlet extends HttpServlet {
     private final UserServiceImpl userServiceImpl = new UserServiceImpl();
 
     @Override
@@ -23,10 +23,10 @@ public class GetUserServlet extends HttpServlet {
                        <html lang="en">
                        <head>
                            <meta charset="UTF-8">
-                           <title>Get user by ID</title>
+                           <title>Retrieve user by ID</title>
                        </head>
                        <body>
-                           <form action="/getUserServlet" method="post">
+                           <form action="/retrieveUserServlet" method="post">
                                <table>
                                    <tr>
                                        <td>
