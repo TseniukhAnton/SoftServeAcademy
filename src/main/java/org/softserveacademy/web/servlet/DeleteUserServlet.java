@@ -17,14 +17,7 @@ public class DeleteUserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        request.getRequestDispatcher("/WEB-INF/delete-user.jsp").forward(request,response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String idStr = request.getParameter("id");
-        Integer id = Integer.parseInt(idStr);
-        userServiceImpl.deleteById(id);
+        userServiceImpl.deleteById(Integer.parseInt(request.getParameter("id")));
         response.sendRedirect("/userServlet");
     }
 }

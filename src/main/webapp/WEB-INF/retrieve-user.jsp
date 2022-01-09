@@ -1,4 +1,4 @@
-<%--
+<%@ page import="org.softserveacademy.model.User" %><%--
   Created by IntelliJ IDEA.
   User: Anton
   Date: 09.01.2022
@@ -11,25 +11,31 @@
     <title>Retrieve User</title>
 </head>
 <body>
-<form action="/retrieveUserServlet" method="post">
-    <table>
-        <tr>
-            <td>
-                <label for="id">ID : </label>
-            </td>
-            <td>
-                <input type="text" id="id" name="id">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="submit" value="Get User">
-            </td>
-            <td>
-                <input type="reset" value="Clear">
-            </td>
-        </tr>
-    </table>
+<%
+    User user = (User) request.getAttribute("user");
+%>
+    <p>ID: <%=user.getId()%></p>
+    <p>Name: <%=user.getName()%></p>
+    <p>Email: <%=user.getEmail()%></p>
+<%--<form action="/retrieveUserServlet" method="post">--%>
+<%--    <table>--%>
+<%--        <tr>--%>
+<%--            <td>--%>
+<%--                <label for="id">ID :</label>--%>
+<%--            </td>--%>
+<%--            <td>--%>
+<%--                <input type="text" id="id" name="id">--%>
+<%--            </td>--%>
+<%--        </tr>--%>
+<%--        <tr>--%>
+<%--            <td>--%>
+<%--                <input type="submit" value="Get User">--%>
+<%--            </td>--%>
+<%--            <td>--%>
+<%--                <input type="reset" value="Clear">--%>
+<%--            </td>--%>
+<%--        </tr>--%>
+<%--    </table>--%>
 </form>
 </body>
 </html>
