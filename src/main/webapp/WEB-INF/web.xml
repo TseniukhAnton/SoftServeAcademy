@@ -29,4 +29,13 @@
         <servlet-name>updateUserServlet</servlet-name>
         <url-pattern>/updateUserServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>deleteUserServlet</servlet-name>
+        <servlet-class>org.softserveacademy.web.servlet.DeleteUserServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteUserServlet</servlet-name>
+        <url-pattern>/deleteUserServlet</url-pattern>
+    </servlet-mapping>
 </web-app>
