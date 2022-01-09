@@ -38,4 +38,13 @@
         <servlet-name>deleteUserServlet</servlet-name>
         <url-pattern>/deleteUserServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>getUserServlet</servlet-name>
+        <servlet-class>org.softserveacademy.web.servlet.GetUserServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getUserServlet</servlet-name>
+        <url-pattern>/getUserServlet</url-pattern>
+    </servlet-mapping>
 </web-app>
