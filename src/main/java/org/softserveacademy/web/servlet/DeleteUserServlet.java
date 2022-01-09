@@ -31,20 +31,12 @@ public class DeleteUserServlet extends HttpServlet {
                         <table>
                             <tr>
                                <td>
-                                    <label for="name">ID : </label>
+                                    <label for="id">ID : </label>
                                 </td>
                                 <td>
                                     <input type="text" id="id" name="id">
                                 </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label for="name">Username : </label>
-                                </td>
-                                <td>
-                                    <input type="text" id="name" name="name">
-                                </td>
-                            </tr>                      
+                            </tr>                                               
                             <tr>
                                 <td>
                                     <input type="submit" value="Delete">
