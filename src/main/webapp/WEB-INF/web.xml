@@ -20,4 +20,13 @@
         <servlet-name>createUserServlet</servlet-name>
         <url-pattern>/createUserServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>updateUserServlet</servlet-name>
+        <servlet-class>org.softserveacademy.web.servlet.UpdateUserServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>updateUserServlet</servlet-name>
+        <url-pattern>/updateUserServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

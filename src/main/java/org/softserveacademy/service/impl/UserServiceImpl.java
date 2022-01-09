@@ -40,13 +40,9 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-    public User update(User user, String newUserName, String newEmail) {
-        if (newUserName != null) {
-            user.setName(newUserName);
-        }
-        if (newEmail != null) {
-            user.setEmail(newEmail);
-        }
+    public User update(Integer id, String newUserName, String newEmail) {
+        User user;
+        user = new User(id, newUserName, newEmail);
 
         return userRepository.update(user);
     }
