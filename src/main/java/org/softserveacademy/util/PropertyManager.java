@@ -1,6 +1,6 @@
 package org.softserveacademy.util;
 
-import org.softserveacademy.exception.ApplicationException;
+import org.softserveacademy.exception.ReadPropertiesFileException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,7 +17,7 @@ public class PropertyManager {
             try (InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream(PROPERTY_FILE_NAME)) {
                 properties.load(stream);
             } catch (IOException e) {
-                throw new ApplicationException("Failed to load property file", e);
+                throw new ReadPropertiesFileException("Failed to load property file", e);
             }
         }
         return properties;
