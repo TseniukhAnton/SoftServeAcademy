@@ -4,12 +4,14 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.softserveacademy.model.User;
+import org.softserveacademy.service.UserService;
 import org.softserveacademy.service.impl.UserServiceImpl;
 
 import java.io.IOException;
 
 public class UpdateUserServlet extends HttpServlet {
-    private final UserServiceImpl userServiceImpl = new UserServiceImpl();
+    private final UserService userService = new UserServiceImpl();
 
     @Override
     public void init() {
@@ -25,7 +27,12 @@ public class UpdateUserServlet extends HttpServlet {
         Integer id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
         String email = request.getParameter("email");
-        userServiceImpl.update(id,name, email);
-        response.sendRedirect("/userServlet");
+        User user = User.builder()
+                .id(id)
+                .name(name)
+                .email(email)
+                .build();
+        userService.update(user);
+        response.sendRedirect("/listUserServlet");
     }
 }

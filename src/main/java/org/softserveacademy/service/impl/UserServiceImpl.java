@@ -35,15 +35,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.getAll();
     }
 
-    public User save(String name, String email) {
-        User user = new User(name, email);
+    public User save(User user) {
         return userRepository.save(user);
     }
 
-    public User update(Integer id, String newUserName, String newEmail) {
-        User user;
-        user = new User(id, newUserName, newEmail);
-
+    public User update(User user) {
         return userRepository.update(user);
     }
 

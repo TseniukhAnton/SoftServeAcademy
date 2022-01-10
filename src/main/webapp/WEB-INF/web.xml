@@ -4,13 +4,13 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
     <servlet>
-        <servlet-name>userServlet</servlet-name>
-        <servlet-class>org.softserveacademy.web.servlet.UserServlet</servlet-class>
+        <servlet-name>listUserServlet</servlet-name>
+        <servlet-class>org.softserveacademy.web.servlet.ListUserServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>userServlet</servlet-name>
-        <url-pattern>/userServlet</url-pattern>
+        <servlet-name>listUserServlet</servlet-name>
+        <url-pattern>/listUserServlet</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>createUserServlet</servlet-name>

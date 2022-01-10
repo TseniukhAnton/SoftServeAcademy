@@ -92,10 +92,13 @@ public class JdbcUserRepositoryImpl implements UserRepository {
     @Override
     public User save(User user) {
         try (PreparedStatement stmt = jdbcUtils.getPreparedStatement(CREATE_USER_QUERY)) {
-            stmt.getGeneratedKeys();
+            //stmt.getGeneratedKeys();
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmail());
             stmt.execute();
+
+            Integer generatedId = null;
+            user.setId(generatedId);
         } catch (Exception e) {
            // log.error(e.getMessage());
         }

@@ -18,7 +18,7 @@
                 <label for="name">ID : </label>
             </td>
             <td>
-                <input type="text" id="id" name="id" disabled>
+                <input type="text" id="id" name="id">
             </td>
         </tr>
         <tr>
