@@ -1,17 +1,19 @@
 package org.softserveacademy.web.servlet;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.softserveacademy.model.User;
-import org.softserveacademy.service.UserService;
 import org.softserveacademy.service.impl.UserServiceImpl;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Map;
 
 public class CreateUserServlet extends HttpServlet {
-    private final UserService userService = new UserServiceImpl();
+    private ObjectMapper objectMapper;
 
     @Override
     public void init() {
@@ -30,7 +32,10 @@ public class CreateUserServlet extends HttpServlet {
                 .name(name)
                 .email(email)
                 .build();
-        userService.save(user);
+        UserServiceImpl.getInstance().save(user);
+        PrintWriter out = response.getWriter();
+        response.setStatus(HttpServletResponse.SC_CREATED);
+        out.println(objectMapper.writeValueAsString(Map.of("id", user.getId())));
         response.sendRedirect("/listUserServlet");
     }
 }

@@ -5,13 +5,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.softserveacademy.model.User;
-import org.softserveacademy.service.UserService;
 import org.softserveacademy.service.impl.UserServiceImpl;
 
 import java.io.IOException;
 
 public class UpdateUserServlet extends HttpServlet {
-    private final UserService userService = new UserServiceImpl();
 
     @Override
     public void init() {
@@ -32,7 +30,7 @@ public class UpdateUserServlet extends HttpServlet {
                 .name(name)
                 .email(email)
                 .build();
-        userService.update(user);
+        UserServiceImpl.getInstance().update(user);
         response.sendRedirect("/listUserServlet");
     }
 }
