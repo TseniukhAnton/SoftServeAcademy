@@ -1,6 +1,5 @@
 package org.softserveacademy.connection;
 
-import org.softserveacademy.repository.jdbc.JdbcUserRepositoryImpl;
 import org.softserveacademy.util.PropertyManager;
 
 import java.io.IOException;
@@ -33,7 +32,7 @@ public class BasicConnectionPool implements ConnectionPool {
         for (int i = 0; i < INITIAL_POOL_SIZE; i++) {
             pool.add(createConnection());
         }
-        return new BasicConnectionPool(pool);
+        return new BasicConnectionPool();
     }
 
     public static Connection createConnection() throws IOException {
