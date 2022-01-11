@@ -1,5 +1,6 @@
 package org.softserveacademy.repository.jdbc;
 
+import org.softserveacademy.exception.UserNotFoundException;
 import org.softserveacademy.model.User;
 import org.softserveacademy.repository.UserRepository;
 import org.softserveacademy.util.JdbcUtils;
@@ -12,6 +13,19 @@ import java.util.List;
 //@Slf4j
 public class JdbcUserRepositoryImpl implements UserRepository {
 
+    private static JdbcUserRepositoryImpl jdbcUserRepositoryImpl;
+
+    private JdbcUserRepositoryImpl() {
+
+    }
+
+    public static synchronized JdbcUserRepositoryImpl getInstance() {
+        if (jdbcUserRepositoryImpl == null) {
+            jdbcUserRepositoryImpl = new JdbcUserRepositoryImpl();
+        }
+        return jdbcUserRepositoryImpl;
+    }
+
     private static final String GET_USERS_QUERY = "SELECT * FROM user";
     private static final String GET_USER_QUERY = "SELECT* FROM user WHERE id=?";
     private static final String GET_USER_EMAIL_QUERY = "SELECT* FROM user WHERE EMAIL=?";
@@ -23,46 +37,48 @@ public class JdbcUserRepositoryImpl implements UserRepository {
 
     @Override
     public User getById(Integer id) {
-        User user = null;
         try (PreparedStatement stmt = jdbcUtils.getPreparedStatement(GET_USER_QUERY)) {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
+            if (rs.next()) {
                 int idRes = rs.getInt(1);
                 String name = rs.getString(2);
                 String email = rs.getString(3);
-                user = User.builder()
+                return User.builder()
                         .id(idRes)
                         .name(name)
                         .email(email)
                         .build();
-            }
-        } catch (Exception e) {
-         //   log.error(e.getMessage());
-        }
-        return user;
-    }
-
-    @Override
-    public User getByEmail(String email) {
-        User user = null;
-        try (PreparedStatement stmt = jdbcUtils.getPreparedStatement(GET_USER_EMAIL_QUERY)) {
-            stmt.setString(3, email);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                int id = rs.getInt(1);
-                String name = rs.getString(2);
-                String emailRes = rs.getString(3);
-                user = User.builder()
-                        .id(id)
-                        .name(name)
-                        .email(emailRes)
-                        .build();
+            } else {
+                throw new UserNotFoundException("User no longer exists");
             }
         } catch (Exception e) {
             //   log.error(e.getMessage());
         }
-        return user;
+        return null;
+    }
+
+    @Override
+    public User getByEmail(String email) {
+        try (PreparedStatement stmt = jdbcUtils.getPreparedStatement(GET_USER_EMAIL_QUERY)) {
+            stmt.setString(3, email);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt(1);
+                String name = rs.getString(2);
+                String emailRes = rs.getString(3);
+                return User.builder()
+                        .id(id)
+                        .name(name)
+                        .email(emailRes)
+                        .build();
+            } else {
+                throw new UserNotFoundException("User wasn't found");
+            }
+        } catch (Exception e) {
+            //   log.error(e.getMessage());
+        }
+        return null;
     }
 
     @Override
@@ -71,7 +87,7 @@ public class JdbcUserRepositoryImpl implements UserRepository {
             stmt.setInt(1, id);
             stmt.executeUpdate();
         } catch (Exception e) {
-          //  log.error(e.getMessage());
+            //  log.error(e.getMessage());
         }
         return getById(id);
     }
@@ -84,7 +100,7 @@ public class JdbcUserRepositoryImpl implements UserRepository {
             stmt.setInt(3, user.getId());
             stmt.execute();
         } catch (Exception e) {
-         //   log.error(e.getMessage());
+            //   log.error(e.getMessage());
         }
         return user;
     }
@@ -100,7 +116,7 @@ public class JdbcUserRepositoryImpl implements UserRepository {
             Integer generatedId = null;
             user.setId(generatedId);
         } catch (Exception e) {
-           // log.error(e.getMessage());
+            // log.error(e.getMessage());
         }
         return user;
     }
@@ -119,10 +135,10 @@ public class JdbcUserRepositoryImpl implements UserRepository {
                         .name(name)
                         .email(email)
                         .build());
-               // log.info("id: {}, name: {}, author: {}", id, name, email);
+                // log.info("id: {}, name: {}, author: {}", id, name, email);
             }
         } catch (Exception e) {
-           // log.error(e.getMessage());
+            // log.error(e.getMessage());
         }
         return users;
     }

@@ -1,46 +1,47 @@
 package org.softserveacademy.service.impl;
 
 import org.softserveacademy.model.User;
-import org.softserveacademy.repository.UserRepository;
 import org.softserveacademy.repository.jdbc.JdbcUserRepositoryImpl;
 import org.softserveacademy.service.UserService;
 
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
-    private final UserRepository userRepository;
+    private static UserServiceImpl userServiceImpl;
 
+    private UserServiceImpl(){
 
-    public UserServiceImpl() {
-        this.userRepository = new JdbcUserRepositoryImpl();
     }
 
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public static synchronized UserServiceImpl getInstance(){
+        if (userServiceImpl == null){
+            userServiceImpl = new UserServiceImpl();
+        }
+        return userServiceImpl;
     }
 
     public User getById(int id) {
-        return userRepository.getById(id);
+        return JdbcUserRepositoryImpl.getInstance().getById(id);
     }
 
     public User getByEmail(String email) {
-        return userRepository.getByEmail(email);
+        return JdbcUserRepositoryImpl.getInstance().getByEmail(email);
     }
 
     public User deleteById(Integer id) {
-        return userRepository.deleteById(id);
+        return JdbcUserRepositoryImpl.getInstance().deleteById(id);
     }
 
     public List<User> getAll() {
-        return userRepository.getAll();
+        return JdbcUserRepositoryImpl.getInstance().getAll();
     }
 
     public User save(User user) {
-        return userRepository.save(user);
+        return JdbcUserRepositoryImpl.getInstance().save(user);
     }
 
     public User update(User user) {
-        return userRepository.update(user);
+        return JdbcUserRepositoryImpl.getInstance().update(user);
     }
 
 }
